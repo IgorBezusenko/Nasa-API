@@ -25,21 +25,21 @@ class NasaApi extends Component {
   }
 
   getDataFromService = (date) => {
-    this.setState({ loading: true });
     NasaService(date).then((result) => {
+      this.setState({ loading: true });
       this.setState({
         date: result.date,
         title: result.title,
         url: result.url,
         explanation: result.explanation,
       });
+      this.setState({ loading: false });
     });
-    this.setState({ loading: false });
   };
 
   render() {
     const { loading, date, title, url, explanation } = this.state;
-
+    console.log(loading);
     if (loading) {
       return <p>Loading...</p>;
     } else {
